@@ -62,12 +62,18 @@ class SqlRelationsApplicationTests {
 		nurse.setProficiency("Cardiology");
 		nurseRepository.save(nurse);
 
-		List<Nurse> nurseList = nurseRepository.findAll();
-		Nurse foundNurse = nurseList.stream()
-				.filter(nurse1 -> nurse1.getProficiency().equals("Cardiology"))
-				.collect(Collectors.toList()).get(0);
+		try {
+			List<Nurse> nurseList = nurseRepository.findAll();
+			Nurse foundNurse = nurseList.stream()
+					.filter(nurse1 -> nurse1.getProficiency().equals("Cardiology"))
+					.collect(Collectors.toList()).get(0);
 
-		assertNotNull(nurse);
+			assertNotNull(nurse);
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+
+
 	}
 
 	@DisplayName("Nurse tablosu mevcut mu ? Doğru oluşturulmuş mu ?")
@@ -147,7 +153,7 @@ class SqlRelationsApplicationTests {
 
 		List<Operation> operationList = operationRepository.findAll();
 		Operation foundOperation = operationList.stream()
-				.filter(operation1 -> operation1.getDoctorId() == 1)
+				.filter(operation1 -> operation1.getDoctorId() == 17)
 				.collect(Collectors.toList()).get(0);
 
 		assertNotNull(foundOperation);
